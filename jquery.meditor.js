@@ -182,8 +182,14 @@ window.MEditor = {
                 if(containerNode && containerNode.classList.contains('textarea')) {
                     //说明是第一段文本，当前也被p标签包裹了
                     MEditor.row = 0;
-                } else {
-                    MEditor.row = $(containerNode).index();
+                }
+                else {
+                    var $spanNode = $meditor.find('span').filter(':not(.img)');
+                    $spanNode.each(function(i,v){
+                        if(v==containerNode) {
+                            MEditor.row = i;
+                        }
+                    });
                 }
                 MEditor.column = MEditor.getCurrentXOffset();
                 console.log('当前光标在第',MEditor.row,'个文本元素');
